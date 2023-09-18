@@ -9,7 +9,10 @@
  */
 
 public class myArrayList<T extends Fraction> {
-
+	private Fraction[] fractions;
+	private int size =50;
+	private int capacity;
+	private double Growth_factor = 0.2;
 	
 	/*************Functional Methods**************/
 
@@ -20,9 +23,10 @@ public class myArrayList<T extends Fraction> {
 	 * @param inFrac new Fraction to append to the arraylist
 	 * @return False if there was a process/input failure, true if the operation was successful
 	 */
-	public static boolean add(Fraction inFrac) {
+	public static boolean add(int index, Fraction inFrac) {
 		return false;
 	}
+
 	
 	/* remove
 	 * 
