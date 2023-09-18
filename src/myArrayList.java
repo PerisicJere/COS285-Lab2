@@ -9,8 +9,8 @@
  */
 
 public class myArrayList<T extends Fraction> {
-	private Fraction[] fractions;
-	private int size;
+	private static Fraction[] fractions;
+	private static int size;
 	private int capacity;
 	private double Growth_factor = 0.2;
 
@@ -52,5 +52,17 @@ public class myArrayList<T extends Fraction> {
 	 */
 	public static boolean contains(Fraction checkFrac) {
 		return false;
+	}
+	
+	/**
+	 * find the index of the input Fraction
+	 * @param input the Fraction to find the index of
+	 * @return the index of input
+	 */
+	public static int indexOf(Fraction input) {
+	    for (int i = 0; i < size; i++) {
+	        if (fractions[i].equals(input)) {
+	            return i; }}
+	    return -1;    
 	}
 }
