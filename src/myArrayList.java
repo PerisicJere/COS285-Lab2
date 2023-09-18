@@ -10,11 +10,15 @@
 
 public class myArrayList<T extends Fraction> {
 	private Fraction[] fractions;
-	private int size =50;
+	private int size;
 	private int capacity;
 	private double Growth_factor = 0.2;
-	
-	/*************Functional Methods**************/
+
+	public myArrayList() {
+		capacity = 50;
+		fractions = new Fraction[capacity];
+		size = 0;
+	}
 
 	/* add
 	 * 
