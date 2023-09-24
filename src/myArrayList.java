@@ -55,14 +55,18 @@ public class myArrayList<T extends Fraction> {
 	}
 	
 	/**
+	 * @author abby pitcairn
 	 * find the index of the input Fraction
 	 * @param input the Fraction to find the index of
 	 * @return the index of input
 	 */
 	public static int indexOf(Fraction input) {
+	    int index = -1;
 	    for (int i = 0; i < size; i++) {
-	        if (fractions[i].equals(input)) {
-	            return i; }}
-	    return -1;    
+	        if (fractions[i].equals(input)) 
+	            index = i;   }
+	    return index;
+	    
+	    
 	}
 }
