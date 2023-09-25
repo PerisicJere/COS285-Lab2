@@ -140,6 +140,9 @@ public class myArrayList<T extends Fraction> {
 		public myListIterator() {
 			position = 0;
 		}
+		public boolean hasNext() {
+			return position < size;
+		}
 
 
 
