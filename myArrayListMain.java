@@ -1,8 +1,10 @@
+import java.util.Arrays;
+
 /*
  * CLASS FractionMain
  * Test and output the results from operations on custom Fraction ArrayList objects
  * @author Ben Sweeney, Abby Pitcairn, Jere Perisic, Esther Mugish
- * 
+ *
  * @version 20230917
  */
 public class myArrayListMain {
@@ -76,5 +78,18 @@ public class myArrayListMain {
 		System.out.println(".contains() TEST");
 
 		System.out.println("\n===========================================");
+	}
+
+	public static String printArray(myArrayList fractions) {
+		String arrayString = "[";
+		for (int i = 0; i < fractions.getSize(); i++){
+			if(i!= fractions.getSize()-1)
+				arrayString +=fractions.get(i).toPrint() + ", ";
+			else
+				arrayString += fractions.get(i).toPrint();
+
+		}
+		arrayString += "]";
+		return arrayString;
 	}
 }
