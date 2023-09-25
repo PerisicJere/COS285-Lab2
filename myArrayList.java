@@ -36,7 +36,9 @@ public class myArrayList<T extends Fraction>{
 			throw new ArrayIndexOutOfBoundsException(index);
 		}
 		if (size == capacity) {
-			reallocate();
+			int newCap = (int) (capacity+capacity*0.2);
+			fractions = Arrays.copyOf(fractions, newCap);
+			capacity = newCap;
 		}
 		for(int i = size; i>index; i--){
 			fractions[i]=fractions[i-1];
@@ -54,7 +56,10 @@ public class myArrayList<T extends Fraction>{
 	 */
 	public void add(Fraction inFrac) {
 		if (size == capacity) {
-			reallocate();
+			int newCap = (int) (capacity+capacity*0.2);
+			fractions = Arrays.copyOf(fractions, newCap);
+			capacity = newCap;
+
 		}
 		fractions[size]=inFrac;
 		size++;
@@ -88,17 +93,6 @@ public class myArrayList<T extends Fraction>{
 	 */
 	public boolean contains(Fraction checkFrac) {
 		return false;
-	}
-
-	/* reallocate
-	 *
-	 * Create a new array 20% larger than the current size;
-	 *
-	 */
-	private void reallocate(){
-		capacity += ((10*capacity)*(10*Growth_factor))/10;
-		fractions = Arrays.copyOf(fractions, capacity);
-		//capacity = 1.2 * capacity;
 	}
 
 	public Fraction get(int index){
