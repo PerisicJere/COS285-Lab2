@@ -140,8 +140,19 @@ public class myArrayList<T extends Fraction> {
 		public myListIterator() {
 			position = 0;
 		}
+		/*
+		 * hasNext method
+		 *
+		 */
 		public boolean hasNext() {
 			return position < size;
+		}
+		/*
+		 * hasPrevious method
+		 *
+		 */
+		public boolean hasPrevious() {
+			return position > 0;
 		}
 
 
