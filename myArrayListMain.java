@@ -47,8 +47,8 @@ public class myArrayListMain {
 	public static void testRemove() {
 
 		myArrayList<Fraction> removeTestArray = new myArrayList<>();
-		removeTestArray.add(new Fraction(1,2));
-		removeTestArray.add(new Fraction(3,8));
+		removeTestArray.add(0, new Fraction(1,2));
+		removeTestArray.add(1, new Fraction(3,8));
 
 		System.out.println("\n===========================================");
 		System.out.println(".remove() TEST");
@@ -58,8 +58,8 @@ public class myArrayListMain {
 		System.out.println("The array now has the following elements: " + removeTestArray.toString());
 
 		System.out.println("Adding a few new fractions to the array...");
-		removeTestArray.add(new Fraction(4,5));
-		removeTestArray.add(new Fraction(99,100));
+		removeTestArray.add(0, new Fraction(4,5));
+		removeTestArray.add(1, new Fraction(99,100));
 		System.out.println("The array now has the following elements: " + removeTestArray.toString());
 		System.out.println("Removing the last entry...");
 		removeTestArray.remove(2);
