@@ -11,7 +11,7 @@
 import java.util.Arrays;
 
 //public class myArrayList<T extends Fraction> {
-public class myArrayList<T> extends Fraction{
+public class myArrayList<T extends Fraction>{
 	private Fraction[] fractions;
 	private int size;
 	private int capacity;
@@ -25,8 +25,9 @@ public class myArrayList<T> extends Fraction{
 
 	/* add
 	 *
-	 * Add a Fraction to the arraylist
+	 * Add a Fraction to the middle of an arraylist
 	 *
+	 * @param index The spot we're inserting a new fraction into
 	 * @param inFrac new Fraction to append to the arraylist
 	 * @return False if there was a process/input failure, true if the operation was successful
 	 */
@@ -44,6 +45,20 @@ public class myArrayList<T> extends Fraction{
 		size++;
 	}
 
+	/* add
+	 *
+	 * Add a Fraction to the end of an ArrayList
+	 *
+	 * @param inFrac new Fraction to append to the arraylist
+	 * @return False if there was a process/input failure, true if the operation was successful
+	 */
+	public void add(Fraction inFrac) {
+		if (size == capacity) {
+			reallocate();
+		}
+		fractions[size]=inFrac;
+		size++;
+	}
 
 	/* remove
 	 *
@@ -85,12 +100,25 @@ public class myArrayList<T> extends Fraction{
 		fractions = Arrays.copyOf(fractions, capacity);
 		//capacity = 1.2 * capacity;
 	}
-	public String toString() {
-		String arrayString = "+";
-		for (Fraction fraction : fractions) {
-			arrayString += fraction.toPrint();
+//	public String printArray() {
+//		String arrayString = " ";
+//		for (int i = 0; i < fractions.length; i++){
+//			arrayString += fractions[i].toPrint();
+//		}
+//		return arrayString;
+//	}
+
+	public Fraction get(int index){
+		if (index < 0 || index >= size){
+			throw new ArrayIndexOutOfBoundsException(index);
 		}
-		return arrayString;
+		return fractions[index];
 	}
+
+	public int getSize(){
+		return size;
+	}
+
+
 }
 
