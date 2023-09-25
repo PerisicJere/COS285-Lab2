@@ -216,4 +216,8 @@ public class Fraction implements INumber <Fraction>, Comparable<Fraction>{
 	public String toPrint() {
 		return this.n + "/" + this.d;
 	}
+
+//	public String toString() {
+//		return this.n + "/" + this.d;
+//	}
 }
