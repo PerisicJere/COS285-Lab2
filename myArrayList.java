@@ -10,11 +10,12 @@
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
+import java.util.ListIterator;
 
 //public class myArrayList<T extends Fraction> {
 public class myArrayList<T extends Fraction> {
 	private Fraction[] fractions;
-	private int size;
+	public int size;
 
 
 	private int capacity;
@@ -130,20 +131,75 @@ public class myArrayList<T extends Fraction> {
 
 
 	}
+
 	/*
 	 * Iterator class
-	 * @author Jere Perisic
+	 * @author Jere Perisic, Abby Pitcairn, Ben Sweeney
 	 */
 	class myListIterator {
 		private int position;
+		private Node<Fraction> nextItem = null;
+		private Node<Fraction> lastItemReturned = null;
 
 		public myListIterator() {
 			position = 0;
+			nextItem =
 		}
 
+		/**
+		 * Construct an iterator for fraction arrayLists that will reference the ith item
+		 *
+		 * @param i The index of the item to be referenced
+		 */
+		public myListIterator(int i) {
+			if (i < 0 || i > size) {
+				throw new IndexOutOfBoundsException("Invalid index " + i);
+			}
+			lastItemReturned = null;
+			if (i == size) {
+				position = size;
+				nextItem = null;
+			} else {
+				nextItem = position; //not position... would want to point to the head. head needs to be defined (ben)
+				for (position = 0; position < i; position++) {
+					nextItem = nextItem.next;
+				}
+			}
+		}
 
+		/** Inserts all the Fractions from the input array into the list just before the item
+		 * that would be returned by the next call to method "next" and after the item that
+		 * would have been returned by method "previous"
+		 *
+		 * @param frc Input array to insert into the list
+		 */
+		public void addAll(Fraction[] frc){
+			for(Fraction fracIn : frc){
+				Node<Fraction> tempNode = new Node<>(fracIn);
+				tempNode.prev = nextItem.prev;
+				nextItem.prev.next = tempNode;
+				tempNode.next = nextItem;
+				nextItem.prev = tempNode;
+			}
 
-
+		}
 	}
 
+	private static class Node<Fraction> {
+		Fraction item;
+		Node<Fraction> next;
+		Node<Fraction> prev;
+
+		Node(Node<Fraction> prev, Fraction element, Node<Fraction> next) {
+			this.item = element;
+			this.next = next;
+			this.prev = prev;
+		}
+		Node(Fraction element) {
+			this.item = element;
+			this.next = null;
+			this.prev = null;
+		}
+	}
 }
+
