@@ -144,14 +144,14 @@ public class Fraction implements INumber <Fraction>, Comparable<Fraction>{
 		}
 	}
 
-	
+
 	/*************Constructors, getters, setters, print**************/
 	/**
 	 * Constructor for Fraction objects
 	 * Authors: Ben Sweeney, Abby Pitcairn
 	 * 
-	 * @param numerator
-	 * @param denominator
+	 * @param newNumerator
+	 * @param newDenominator
 	 */
 	public Fraction(int newNumerator, int newDenominator) {
 		//super();
@@ -163,8 +163,6 @@ public class Fraction implements INumber <Fraction>, Comparable<Fraction>{
 	/**
 	 * Default constructor
 	 * Author: Ben Sweeney
-	 * @param numerator
-	 * @param denominator
 	 */
 	public Fraction() {
 		this.n = 0;
