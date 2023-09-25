@@ -14,13 +14,16 @@ import java.util.Arrays;
 public class myArrayList<T extends Fraction>{
 	private Fraction[] fractions;
 	private int size;
-	private int capacity;
+
+
+
+	private int capacity  ;
 	private double Growth_factor = 0.2;
 
 	public myArrayList() {
-		capacity = 50;
-		fractions = new Fraction[capacity];
-		size = 0;
+		this.capacity = 50;
+		this.fractions = new Fraction[capacity];
+		this.size = 0;
 	}
 
 	/* add
@@ -32,14 +35,15 @@ public class myArrayList<T extends Fraction>{
 	 * @return False if there was a process/input failure, true if the operation was successful
 	 */
 	public void add(int index, Fraction inFrac) {
-		if (index < 0 || index >= size){
+		if (index < 0 || index > size){
 			throw new ArrayIndexOutOfBoundsException(index);
 		}
 		if (size == capacity) {
-			int newCap = (int) (capacity+capacity*0.2);
+			int newCap = (int) (capacity+capacity*Growth_factor);
 			fractions = Arrays.copyOf(fractions, newCap);
 			capacity = newCap;
 		}
+
 		for(int i = size; i>index; i--){
 			fractions[i]=fractions[i-1];
 		}
@@ -56,7 +60,7 @@ public class myArrayList<T extends Fraction>{
 	 */
 	public void add(Fraction inFrac) {
 		if (size == capacity) {
-			int newCap = (int) (capacity+capacity*0.2);
+			int newCap = (int) (capacity+capacity*Growth_factor);
 			fractions = Arrays.copyOf(fractions, newCap);
 			capacity = newCap;
 
@@ -106,6 +110,23 @@ public class myArrayList<T extends Fraction>{
 		return size;
 	}
 
+	public int getCapacity() {
+		return capacity;
+	}
+	/**
+	 * @author abby pitcairn
+	 * find the index of the input Fraction
+	 * @param input the Fraction to find the index of
+	 * @return the index of input
+	 */
+	public int indexOf(Fraction input) {
+		int index = -1;
+		for (int i = 0; i < size; i++) {
+			if (fractions[i].equals(input))
+				index = i;   }
+		return index;
 
+
+	}
 }
 
