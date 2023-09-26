@@ -155,7 +155,29 @@ public class myArrayList<T extends Fraction> {
 			return position > 0;
 		}
 
+		/**next method
+		 * @author Abby Pitcairn
+		 * @return the fraction at the next position
+		 * @throws NoSuchElementException if there is no next element
+		 */
+		public Fraction next(){
+			if (!this.hasNext())
+				throw new NoSuchElementException();
+			position++;
+			return fractions[position];
+		}
 
+		/**previous method
+		 * @author Abby Pitcairn
+		 * @return the fraction at the previous position
+		 * @throws NoSuchElementException if there is no previous element
+		 */
+		public Fraction previous(){
+			if (!this.hasPrevious())
+				throw new NoSuchElementException();
+			position--;
+			return fractions[position];
+		}
 
 
 	}
