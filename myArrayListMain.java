@@ -93,4 +93,6 @@ public class myArrayListMain {
 		System.out.println("Increased capacity: " + list.getCapacity());
 
 	}
+
+
 }
