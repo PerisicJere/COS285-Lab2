@@ -132,7 +132,7 @@ public class myArrayList<T extends Fraction> {
 	}
 	/*
 	 * Iterator class
-	 * @author Jere Perisic
+	 * @author Jere Perisic, Abigail Pitcairn
 	 */
 	class myListIterator {
 		private int position;
