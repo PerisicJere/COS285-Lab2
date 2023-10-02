@@ -42,7 +42,7 @@ public class myArrayListMain {
 	}
 
 	/** testRemoveAllNext
-	 * Creates a Fraction array list nd a fraction array list iterator.
+	 * Creates a Fraction array list and a fraction array list iterator.
 	 * Determines if the iterator can successfully remove the elements in the array list after the intended position
 	 * @author Sweeney
 	 */
@@ -61,6 +61,47 @@ public class myArrayListMain {
 		System.out.println("Test case post-removal: " + removeAllNextArrayList.print());
 		System.out.println("**TEST COMPLETE**\n");
 	}
+ @Test
+    public void testHasNextReturnsTrue() {
+        myArrayList.myListIterator iterator = myList.new myListIterator();
 
+        if (customHasNext(iterator)) {
+            
+        } else {
+           
+            throw new NoSuchElementException();
+        }
 
+        iterator.next(); 
+
+        if (customHasNext(iterator)) {
+          
+        } else {
+        
+            throw new NoSuchElementException();
+        }
+    }
+
+	 @Test 
+    public void testHasPrevious() {
+        myArrayList.myListIterator iterator = myList.new myListIterator();
+
+        iterator.next(); 
+        if (customHasPrevious(iterator)) {
+          
+        } else {
+            
+            throw new AssertionError("Expected hasPrevious to return true, but it returned false");
+        }
+
+        iterator.next();
+        if (customHasPrevious(iterator)) {
+            
+        } else {
+        
+            throw new AssertionError("Expected hasPrevious to return true, but it returned false");
+        }
+    }
+
+	
 }
