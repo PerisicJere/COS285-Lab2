@@ -1,96 +1,66 @@
 import java.util.Arrays;
-import java.util.Random;
 
 /*
  * CLASS FractionMain
- * Test and output the results from operations on custom Fraction ArrayList objects
+ * Test and output the results from iterator operations in Fraction array lists
  * @author Ben Sweeney, Abby Pitcairn, Jere Perisic, Esther Mugish
  *
- * @version 20230917
+ * @version 20231001
  */
 public class myArrayListMain {
-	/*
-	 *@author Jere Perisic
-	 * Testing myArrayList.java
-	 *
-	 */
 	public static void main(String[] args) {
 
-		testAdd();
-		testIndexOf();
-		testRemove();
-		testCapacity(61);
-
-
+		testAddAll();
+		testRemoveAllNext();
 	}
-
-	/*
-	 * Tests the add method of myArrayList.
+	/** testAddAll
+	 * Creates a Fraction array list, a fraction array, and a fraction array list iterator.
+	 * Determines if the iterator can successfully add the fraction array into the desired position
+	 * in the array list.
+	 * @author Sweeney
 	 */
-	public static void testAdd() {
-		System.out.println("Testing add method.");
-		myArrayList list = new myArrayList();
-		for (int i = 0; i < 10; i++) {
-			Fraction fraction = new Fraction(i, i + 2);
-			list.add(list.getSize(), fraction);
-			System.out.print(list.get(i) + ", ");
+	public static void testAddAll() {
+		myArrayList<Fraction> addAllTestFracArray = new myArrayList<>();
+		//myArrayList<Fraction> fracArrayListToAdd = new myArrayList<>();
+		Fraction[] fracArrayToAdd = new Fraction[3];
+		for(int iter = 0; iter < 5; iter++){
+			addAllTestFracArray.add(new Fraction(iter,iter+1));
 		}
-		System.out.println("\n" + "Add successful");
-		System.out.println(list.getCapacity() + "\n");
-	}
-
-	/*
-	 * Tests the indexOf method of myArrayList.
-	 */
-	public static void testIndexOf() {
-		System.out.println("Testing IndexOf");
-		myArrayList list = new myArrayList();
-
-		Fraction fra1 = new Fraction(1, 2);
-		Fraction fra2 = new Fraction(3, 4);
-		list.add(0, fra1);
-		list.add(1, fra2);
-		int index = list.indexOf(fra2);
-		System.out.println("Fra2: " + index);
-		int nonExistingIndex = list.indexOf(new Fraction(2, 3));
-		System.out.println("Non existing index: " + nonExistingIndex);
-		System.out.println("Index of testing done" + "\n");
-	}
-
-	/*
-	 * Tests the remove method of myArrayList.
-	 */
-	public static void testRemove() {
-		System.out.println("Testing remove");
-		myArrayList list = new myArrayList();
-
-		Fraction fra1 = new Fraction(1, 2);
-		Fraction fra2 = new Fraction(3, 4);
-
-		list.add(0, fra1);
-		list.add(1, fra2);
-
-		Fraction removed = list.remove(0);
-
-		assert removed.equals(fra1);
-
-		assert list.getSize() == 1;
-	}
-	/*
-	 * Tests the capacity increase of myArrayList.
-	 *
-	 * @param n The number of fractions to add for testing capacity increase.
-	 */
-
-	public static void testCapacity(int n) {
-		System.out.println("Testing capacity increase");
-		myArrayList list = new myArrayList();
-
-		System.out.println("Initial capacity:" + list.getCapacity());
-		for (int i = 0; i < n; i++) {
-			list.add(i, new Fraction(i, i + 1));
+		System.out.println("Testing testAddAll");
+		System.out.println("Test case initial array: " + addAllTestFracArray.print());
+		for(int iter = 0; iter < fracArrayToAdd.length; iter++){
+			fracArrayToAdd[iter] = (new Fraction(iter+9,iter+10));
 		}
-		System.out.println("Increased capacity: " + list.getCapacity());
+		System.out.println("Test case array to add: " + Arrays.toString(fracArrayToAdd));
+
+		myArrayList.myListIterator fracIter = new myArrayList.myListIterator();
+		System.out.println("Adding before item " + fracIter.next());
+		fracIter.addAll(fracArrayToAdd);
+		System.out.println("Test case post-add array: " + addAllTestFracArray.print());
+		System.out.println("**TEST COMPLETE**\n");
 
 	}
+
+	/** testRemoveAllNext
+	 * Creates a Fraction array list nd a fraction array list iterator.
+	 * Determines if the iterator can successfully remove the elements in the array list after the intended position
+	 * @author Sweeney
+	 */
+	public static void testRemoveAllNext() {
+		myArrayList<Fraction> removeAllNextArrayList = new myArrayList<>();
+		myArrayList.myListIterator fracIter = new myArrayList.myListIterator();
+
+		for (int iter = 2; iter < 7; iter++) {
+			removeAllNextArrayList.add(new Fraction(iter, iter + 1));
+		}
+		System.out.println("Testing removeAllNext");
+
+		System.out.println("Test case initial array: " + removeAllNextArrayList.print());
+		System.out.println("Removing after item " + fracIter.get(fracIter.getPos() + 1));
+		fracIter.removeAllNext();
+		System.out.println("Test case post-removal: " + removeAllNextArrayList.print());
+		System.out.println("**TEST COMPLETE**\n");
+	}
+
+
 }
