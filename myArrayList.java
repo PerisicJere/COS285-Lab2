@@ -10,12 +10,11 @@
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
-import java.util.ListIterator;
 
 //public class myArrayList<T extends Fraction> {
 public class myArrayList<T extends Fraction> {
 	private Fraction[] fractions;
-	public int size;
+	private int size;
 
 
 	private int capacity;
@@ -134,7 +133,7 @@ public class myArrayList<T extends Fraction> {
 
 	/*
 	 * Iterator class
-	 * @author Jere Perisic, Abby Pitcairn, Ben Sweeney
+	 * @author Jere Perisic, Abigail Pitcairn
 	 */
 	class myListIterator {
 		private int position;
@@ -143,7 +142,21 @@ public class myArrayList<T extends Fraction> {
 
 		public myListIterator() {
 			position = 0;
-			nextItem =
+			//nextItem =
+		}
+		/*
+		 * hasNext method
+		 *
+		 */
+		public boolean hasNext() {
+			return position < size;
+		}
+		/*
+		 * hasPrevious method
+		 *
+		 */
+		public boolean hasPrevious() {
+			return position > 0;
 		}
 
 		/**
@@ -166,7 +179,29 @@ public class myArrayList<T extends Fraction> {
 				}
 			}
 		}
+		/**next method
+		 * @author Abby Pitcairn
+		 * @return the fraction at the next position
+		 * @throws NoSuchElementException if there is no next element
+		 */
+		public Fraction next(){
+			if (!this.hasNext())
+				throw new NoSuchElementException();
+			position++;
+			return fractions[position];
+		}
 
+		/**previous method
+		 * @author Abby Pitcairn
+		 * @return the fraction at the previous position
+		 * @throws NoSuchElementException if there is no previous element
+		 */
+		public Fraction previous(){
+			if (!this.hasPrevious())
+				throw new NoSuchElementException();
+			position--;
+			return fractions[position];
+		}
 		/** Inserts all the Fractions from the input array into the list just before the item
 		 * that would be returned by the next call to method "next" and after the item that
 		 * would have been returned by method "previous"
