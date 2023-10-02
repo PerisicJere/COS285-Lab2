@@ -1,4 +1,4 @@
-/*
+/**
  * CLASS myArrayList
  * Create custom arraylist objects with a default initial size of 50 and a growth rate of 20%
  *
@@ -11,14 +11,13 @@
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-//public class myArrayList<T extends Fraction> {
 public class myArrayList<T extends Fraction> {
-	private Fraction[] fractions;
-	private int size;
+	private static Fraction[] fractions;
+	private static int size;
 
 
-	private int capacity;
-	private double Growth_factor = 0.2;
+	private static int capacity;
+	private static double Growth_factor = 0.2;
 
 	public myArrayList() {
 		this.capacity = 50;
@@ -26,15 +25,14 @@ public class myArrayList<T extends Fraction> {
 		this.size = 0;
 	}
 
-	/* add
-	 *
+	/** add
 	 * Add a Fraction to the middle of an arraylist
 	 *
 	 * @param index The spot we're inserting a new fraction into
 	 * @param inFrac new Fraction to append to the arraylist
 	 * @return False if there was a process/input failure, true if the operation was successful
 	 */
-	public void add(int index, Fraction inFrac) {
+	public static void add(int index, Fraction inFrac) {
 		if (index < 0 || index > size) {
 			throw new ArrayIndexOutOfBoundsException(index);
 		}
@@ -47,12 +45,11 @@ public class myArrayList<T extends Fraction> {
 		for (int i = size; i > index; i--) {
 			fractions[i] = fractions[i - 1];
 		}
-		fractions[size] = inFrac;
+		fractions[index] = inFrac;
 		size++;
 	}
 
-	/* add
-	 *
+	/** add
 	 * Add a Fraction to the end of an ArrayList
 	 *
 	 * @param inFrac new Fraction to append to the arraylist
@@ -69,14 +66,13 @@ public class myArrayList<T extends Fraction> {
 		size++;
 	}
 
-	/* remove
-	 *
+	/** remove
 	 * Remove a Fraction from the arraylist
 	 *
 	 * @param index The specified index of the Fraction element to remove
 	 * @return the removed value
 	 */
-	public Fraction remove(int index) {
+	public static Fraction remove(int index) {
 		if (index < 0 || index >= size) {
 			throw new ArrayIndexOutOfBoundsException(index);
 		}
@@ -88,8 +84,7 @@ public class myArrayList<T extends Fraction> {
 		return returnValue;
 	}
 
-	/* contains
-	 *
+	/** contains*
 	 * See if a fraction is contained within the arraylist
 	 *
 	 * @param checkFrac Specified Fraction to find in the arraylist
@@ -130,24 +125,57 @@ public class myArrayList<T extends Fraction> {
 
 
 	}
-	/*
-	 * Iterator class
-	 * @author Jere Perisic, Abigail Pitcairn
-	 */
-	class myListIterator {
-		private int position;
 
+	public String print() {
+		String output = "[";
+		for(int iter = 0; iter<size-1; iter++){
+			output += get(iter).toString() + ", ";
+		}
+		output += this.get(size-1) + "]";
+		return output;
+	}
+
+	//public String toString
+
+	/**
+	 * Iterator class
+	 * Building a place marker to track the current position in a linked list
+	 * @author Jere Perisic, Abigail Pitcairn, Ben Sweeney
+	 */
+	static class myListIterator {
+		private int position = 0;
+//		private int lastItemReturned = 0;
+//		private int nextItem = 0;
+		//private Node<Fraction> nextItem = null;
+		//private Node<Fraction> lastItemReturned = null;
+		//private Node<Fraction> head = new Node<>
+
+		/**
+		 * Default constructor when no index position is specified
+		 * @author Perisic
+		 */
 		public myListIterator() {
 			position = 0;
 		}
-		/*
+
+//		/**
+//		 * Default constructor when an index position is provided
+//		 * @author Perisic, Sweeney
+//		 */
+//		public myListIterator(int start) {
+//			position = start;
+//			lastItemReturned = start - 1;
+//			nextItem = start + 1;
+//		}
+
+		/**
 		 * hasNext method
 		 *
 		 */
 		public boolean hasNext() {
 			return position < size;
 		}
-		/*
+		/**
 		 * hasPrevious method
 		 *
 		 */
@@ -178,8 +206,84 @@ public class myArrayList<T extends Fraction> {
 			position--;
 			return fractions[position];
 		}
+		/** addAll
+		 * Inserts all the Fractions from the input array into the list just before the item
+		 * that would be returned by the next call to method "next" and after the item that
+		 * would have been returned by method "previous"
+		 * @author Sweeney
+		 * @param frc Input array to insert into the list
+		 */
+		public boolean addAll(Fraction[] frc){
+			//use position
+//			System.out.print("IN ADDALL METHOD: RECEIVED " + Arrays.toString(frc));
+			for (int iter = 0; iter < frc.length; iter++){
+//				System.out.println("iter = "  + iter);
+//				System.out.println("frc[iter] = "  + frc[iter]);
+//				System.out.println("pos = "  + position);
 
+				add(position, frc[iter]);
+//				System.out.println(print());
+				position++;
+			}
+			return false;
+		}
 
+		/** removeAllNext
+		 * Removes all items located after the item returned from a call to method "next"
+		 * @author Sweeney
+		 */
+		public void removeAllNext(){
+			int deletionPos = size-1;
+			if ((position + 2) < size) {
+             while(deletionPos>position+1){
+				remove(deletionPos);
+				 deletionPos--;
+			 }
+            } else {
+                throw new IllegalStateException("There are no elements after the item that would be returned by a \"next\" call");
+            }
+		}
+
+		public String print() {
+			String output = "[";
+			for(int iter = 0; iter<size-1; iter++){
+				output += get(iter).toString() + ", ";
+			}
+			output += get(size-1) + "]";
+			return output;
+		}
+
+		public Fraction get(int index) {
+			if (index < 0 || index >= size) {
+				throw new ArrayIndexOutOfBoundsException(index);
+			}
+			return fractions[index];
+		}
+		public int getPos() {
+			return position;
+		}
 	}
 
+//	/**
+//	 * Private class for node building with Fraction objects
+//	 * @author Sweeney
+//	 * @param <Fraction>
+//	 */
+//	private static class Node<Fraction> {
+//		Fraction item;
+//		Node<Fraction> next;
+//		Node<Fraction> prev;
+//
+//		Node(Node<Fraction> prev, Fraction element, Node<Fraction> next) {
+//			this.item = element;
+//			this.next = next;
+//			this.prev = prev;
+//		}
+//		Node(Fraction element) {
+//			this.item = element;
+//			this.next = null;
+//			this.prev = null;
+//		}
+//	}
 }
+
