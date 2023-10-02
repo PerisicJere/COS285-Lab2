@@ -164,21 +164,21 @@ public class myArrayList<T extends Fraction> {
 		 *
 		 * @param i The index of the item to be referenced
 		 */
-		public myListIterator(int i) {
-			if (i < 0 || i > size) {
-				throw new IndexOutOfBoundsException("Invalid index " + i);
-			}
-			lastItemReturned = null;
-			if (i == size) {
-				position = size;
-				nextItem = null;
-			} else {
-				nextItem = position; //not position... would want to point to the head. head needs to be defined (ben)
-				for (position = 0; position < i; position++) {
-					nextItem = nextItem.next;
-				}
-			}
-		}
+//		public myListIterator(int i) {
+//			if (i < 0 || i > size) {
+//				throw new IndexOutOfBoundsException("Invalid index " + i);
+//			}
+//			lastItemReturned = null;
+//			if (i == size) {
+//				position = size;
+//				nextItem = null;
+//			} else {
+//				nextItem = position; //not position... would want to point to the head. head needs to be defined (ben)
+//				for (position = 0; position < i; position++) {
+//					nextItem = nextItem.next;
+//				}
+//			}
+//		}
 		/**next method
 		 * @author Abby Pitcairn
 		 * @return the fraction at the next position
